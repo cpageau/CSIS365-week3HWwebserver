@@ -31,7 +31,7 @@ while True:
      # the except clause is executed
      try:
          # Receives the request message from the client
-         message = #Fill in start             #Fill in end    
+         message = connectionSocket.recv(1024).decode()    
        
          # Extract the path of the requested object from the message
          # The path is the second part of HTTP header, identified by [1]
@@ -47,7 +47,7 @@ while True:
          # Send the HTTP response header line to the connection socket as 
          # per RFC2616 Sections 3.1 and 10.2.1.  Be sure to end the 
          # message with a pair of CRLFs as \r\n\r\n
-         #Fill in start             #Fill in end               
+         connectionSocket.send("HTTP/1.1 200 OK\r\n\r\n".encode())               
  
          # Send the content of the requested file to the connection socket
          for i in range(0, len(outputdata)):  
@@ -61,11 +61,11 @@ while True:
          # Send HTTP response header for file not found as per RFC2616 
          # Sections 3.1 and 10.4.5.  Be sure to end the message with a 
          # pair of CRLFs as \r\n\r\n
-         #Fill in start             #Fill in end               
+         connectionSocket.send("HTTP/1.1 404 Not Found\r\n\r\n".encode())               
                         
          # Send an HTML response *message* with the error code and
          # description. End the message with a single CRLF as \r\n 
-         #Fill in start             #Fill in end               
+         connectionSocket.send("<html><head></head><body><h1>404 Not Found</h1></body></html>\r\n".encode())              
             
          # Close the client connection socket
          connectionSocket.close()
