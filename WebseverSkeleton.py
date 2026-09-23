@@ -23,7 +23,7 @@ while True:
      print('The server is ready to receive')
 
      # Set up a new connection from the client
-     connectionSocket, addr = ServereSocket.accept()            
+     connectionSocket, addr = ServerSocket.accept()            
 
      # If an exception occurs during the execution of try clause
      # the rest of the clause is skipped
